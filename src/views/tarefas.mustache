@@ -8,7 +8,9 @@
         <div class="w3-card w3-padding">
             <h1>Lista de tarefas</h1>
             <hr>
-            <p>Criar uma lista de <a href="{{ local }}/tarefas">tarefas</a></p>
+            {{#tarefas}}
+                <li>{{ id }} - {{ tarefa }}</li>
+            {{/tarefas}}
         </div>
     </div>
 </body>

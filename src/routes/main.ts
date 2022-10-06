@@ -17,8 +17,26 @@ router.get("/tarefas", (req: Request, res: Response) => {
     // Buscar as tarefas
     const tarefa: Tarefa = new Tarefa();
     const tarefas: tarefaTipo[] = tarefa.listarTarefas();
+    const mensagem: string = '';
 
-    res.render('tarefas', { css, tarefas });
+    res.render('tarefas', { css, tarefas, mensagem });
+});
+
+router.get("/tarefas/:tarefaId", (req: Request, res: Response) => {
+    const tarefaId: string = req.params.tarefaId;
+    const id: number = parseInt(tarefaId);
+    let mensagem: string = '';
+
+    if (isNaN(id)){
+        mensagem = 'ERRO: Número incorreto!';
+    } else {
+        const tarefa: Tarefa = new Tarefa();
+        const descricao: string = tarefa.obterTarefa(id);
+        mensagem = (descricao == '' ) ? '-> Tarefa inexistente!' : descricao ;
+    }
+
+    res.render('tarefa', { mensagem });
+
 });
 
 router.post("/tarefas", (req: Request, res: Response) => {
@@ -34,8 +52,9 @@ router.post("/tarefas", (req: Request, res: Response) => {
     const id: number = tarefa.adicionarTarefa(descricao);
 
     const tarefas: tarefaTipo[] = tarefa.listarTarefas();
+    const mensagem: string = '';
 
-    res.render('tarefas', { css, tarefas });
+    res.render('tarefas', { css, tarefas, mensagem });
 } );
 
 export default router;

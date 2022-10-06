@@ -27,8 +27,12 @@ class Tarefa implements ITarefa {
 
     obterTarefa(id_tarefa: number): string{
         if (id_tarefa > 0){
-            const tarefa: any = tarefas.find(tarefa => tarefa.id === id_tarefa);
-            return (tarefa.descricao == undefined) ? '' : tarefa.descricao;
+            const tarefa: tarefaTipo | undefined = tarefas.find(obj => obj.id === id_tarefa);
+            if (tarefa != undefined){
+                return tarefa.descricao;
+            } else {
+                return '';
+            }
         } else {
             return '';
         }

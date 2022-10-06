@@ -6,23 +6,18 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import mustache from 'mustache-express';
-
-
+import rotas from './routes/main';
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-    res.send(`
-        <html>
-        <head><title>Página bacana!</title></head>
-        <body>
-            <h1>Lista de tarefas</h1>
-            <hr>
-            <p>Criar uma lista de <i>tarefas</i></p>
-        </body>
-        </html>
-    `);
-});
+app.set('view engine', 'mustache');
+app.set('views', path.join(__dirname, 'views'));
+app.engine('mustache', mustache());
+
+const basePath: string = path.join(__dirname, '../public');
+app.use(express.static(basePath));
+
+app.use(rotas);
 
 // Rota incorreta:
 app.use((req: Request, res: Response) => {

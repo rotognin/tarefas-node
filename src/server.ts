@@ -16,6 +16,7 @@ app.engine('mustache', mustache());
 
 const basePath: string = path.join(__dirname, '../public');
 app.use(express.static(basePath));
+app.use(express.json());
 
 app.use(rotas);
 

@@ -1,0 +1,4 @@
+Projeto que usará o MySQL como banco de dados
+Futuramente adicionar o MongoDB também
+
+Link do github oficial do mustache para Javascript: https://github.com/janl/mustache.js
